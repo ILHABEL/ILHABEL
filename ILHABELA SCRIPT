@@ -1,0 +1,27 @@
+local function puxarArma(jogador, nomeArma)
+    if jogador and jogador.Character then
+        local arma = Instance.new("Tool")
+        arma.Name = nomeArma
+        arma.Parent = jogador.Backpack
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(jogador)
+    jogador.Chatted:Connect(function(mensagem)
+        if mensagem:lower() == "!arma" then
+            puxarArma(jogador, "Parafal")
+        end
+    end)
+end)
+
+
+local addMoneyButton = script.Parent:WaitForChild("AddMoneyButton")
+
+addMoneyButton.MouseButton1Click:Connect(function()
+    local player = game.Players.LocalPlayer
+    if player:FindFirstChild("leaderstats") then
+        player.leaderstats.Dinheiro.Value = player.leaderstats.Dinheiro.Value + 50000
+    end
+end)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
